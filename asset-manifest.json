@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Hinachanbo/connect-four/static/css/main.e45f87d7.css",
-    "main.js": "/Hinachanbo/connect-four/static/js/main.24414bb1.js",
-    "static/media/dropitem.mp3": "/Hinachanbo/connect-four/static/media/dropitem.4226691ab8ea42d4928e.mp3",
-    "index.html": "/Hinachanbo/connect-four/index.html",
-    "main.e45f87d7.css.map": "/Hinachanbo/connect-four/static/css/main.e45f87d7.css.map",
-    "main.24414bb1.js.map": "/Hinachanbo/connect-four/static/js/main.24414bb1.js.map"
+    "main.css": "/connect-four/static/css/main.e45f87d7.css",
+    "main.js": "/connect-four/static/js/main.f69b7ded.js",
+    "static/media/dropitem.mp3": "/connect-four/static/media/dropitem.4226691ab8ea42d4928e.mp3",
+    "index.html": "/connect-four/index.html",
+    "main.e45f87d7.css.map": "/connect-four/static/css/main.e45f87d7.css.map",
+    "main.f69b7ded.js.map": "/connect-four/static/js/main.f69b7ded.js.map"
   },
   "entrypoints": [
     "static/css/main.e45f87d7.css",
-    "static/js/main.24414bb1.js"
+    "static/js/main.f69b7ded.js"
   ]
 }
