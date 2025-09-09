@@ -2,7 +2,7 @@
   "name": "connect-four",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Hinachanbo/connect-four",
+  "homepage": "https://Hinachanbo.github.io/connect-four",
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
     "@testing-library/dom": "^10.4.1",
