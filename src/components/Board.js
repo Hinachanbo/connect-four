@@ -88,7 +88,7 @@ export default function Board() {
         <button className="btn btn-secondary" onClick={() => { if(aiThinking || winner) return; dispatch(undoMove()) }}>
           <FiArrowLeft style={{ marginRight: 5 }} /> １手戻す
         </button>
-        <button className="btn btn-primary" onClick={() => { toast.dismiss(); dispatch(resetGame()) }}>
+        <button className="btn btn-primary" onClick={() => { if(aiThinking) return; toast.dismiss(); dispatch(resetGame()) }}>
           <FiRefreshCw style={{ marginRight: 5 }} /> リセット
         </button>
       </div>
