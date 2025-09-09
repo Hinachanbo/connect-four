@@ -1,0 +1,88 @@
+h2{
+  background-color: skyblue;
+  padding: 10px;
+  margin: 0 !important;
+}
+
+.ai-select.mb-3{
+  background-color: skyblue;
+  padding: 15px;
+  margin: 0 !important;
+}
+
+/* 盤面のグリッド */
+.board {
+  display: grid;
+  grid-template-columns: repeat(7, 50px);
+  justify-content: center;
+  margin-bottom: 0;
+  /*background: linear-gradient(to bottom, skyblue 95%, #A0522D 10%);*/
+  background-color: skyblue;
+}
+
+
+/* 盤面のセル */
+.cell {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #a0512d;
+  background-color: burlywood;
+}
+
+.red, .yellow, .empty, .emplast{
+  width : 40px;
+  height : 40px;
+  border-radius: 50%;
+}
+
+/* プレイヤーの駒 */
+.red {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.yellow {
+  background-color: rgba(255, 255, 0, 0.8);
+}
+
+.empty {
+  background-color: skyblue;
+}
+
+.empty.highlight {
+  border: 3px solid orange;
+  /*animation: blink 1s infinite;*/
+  background-color: rgba(255, 132, 0, 0.498);
+}
+
+/* 中央揃え */
+.center {
+  text-align: center;
+}
+.base{
+  height: 20px;
+  width: 400px;
+  background-color: burlywood;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ボタン */
+button {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btnspace{
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background: linear-gradient(to top, maroon, #A0522D	);
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
