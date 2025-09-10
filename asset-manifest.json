@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/connect-four/static/css/main.e45f87d7.css",
-    "main.js": "/connect-four/static/js/main.6a347af8.js",
+    "main.js": "/connect-four/static/js/main.13ecdf35.js",
     "static/media/dropitem.mp3": "/connect-four/static/media/dropitem.4226691ab8ea42d4928e.mp3",
     "index.html": "/connect-four/index.html",
     "main.e45f87d7.css.map": "/connect-four/static/css/main.e45f87d7.css.map",
-    "main.6a347af8.js.map": "/connect-four/static/js/main.6a347af8.js.map"
+    "main.13ecdf35.js.map": "/connect-four/static/js/main.13ecdf35.js.map"
   },
   "entrypoints": [
     "static/css/main.e45f87d7.css",
-    "static/js/main.6a347af8.js"
+    "static/js/main.13ecdf35.js"
   ]
 }
