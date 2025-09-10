@@ -1,5 +1,5 @@
-import { checkWinner } from "./checkWinner";
-import { ROWS, COLS } from '../config';
+import { checkWinner } from "./checkWinner.js";
+import { ROWS, COLS } from '../config.js';
 
 //　min-max法
 export function evaluateBoard(board, player){

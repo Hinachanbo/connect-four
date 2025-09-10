@@ -4,6 +4,7 @@ import { dropDisc, undoMove, resetGame, setAiType } from "../store";
 import { getRandomMove} from "../utils/aiBeginer";
 import { minimax } from "../utils/aiMaster";
 import { mcts } from "../utils/aiCelestial";
+import { thunderSearch } from "../utils/aiNext.js";
 import { ToastContainer, toast } from "react-toastify";
 import { FiRefreshCw, FiArrowLeft } from "react-icons/fi";
 import { FaCat, FaPaw } from "react-icons/fa";
@@ -26,6 +27,23 @@ export default function Board() {
     else if (winner === -1) toast.warning("一姫の勝ち！");
     else if (winner === "draw") toast.info("引き分け！");
   }, [winner]);
+  /*
+  useEffect(() => {
+    if (winner || currentPlayer !== 1) return;
+    setAiThinking(true);
+    const timer = setTimeout(() => {
+      const move = mcts(board, nextRow, -1, 15000);
+      if (move) {
+        const row = move.row;
+        const col = move.col;
+        dispatch(dropDisc(row, col));
+        playDropSound();
+      }
+      setAiThinking(false);
+    }, 2000 + Math.floor(Math.random()*1000));
+    return () => clearTimeout(timer);
+  }, [board, currentPlayer, winner, nextRow, aiType, dispatch]);
+  */
 
   useEffect(() => {
     if (winner || currentPlayer !== -1) return;
@@ -37,7 +55,8 @@ export default function Board() {
         const col = minimax(board, nextRow, 6, true, -1,-Infinity,Infinity,null).col;
         move = {row : nextRow[col] ,col : col};
       }
-      else move = getRandomMove(board, nextRow,currentPlayer);
+      else if(aiType === "beginer") move = getRandomMove(board, nextRow,currentPlayer);
+      else if(aiType === "ainext") move = thunderSearch(board,nextRow,-1,15000);
 
       if (move) {
         const row = move.row;
@@ -68,9 +87,11 @@ export default function Board() {
         <label>一姫<FaPaw size={24} color="pink" />のランク:</label>
         <select value={aiType} onChange={e => dispatch(setAiType(e.target.value))}
                 disabled={board.some(r => r.some(c => c !== 0))}>
-          <option value="beginer">初心</option>
+          <option value="beginer">雀士</option>
           <option value="master">雀豪</option>
-          <option value="celestial">魂天</option>
+          <option value="celestial">雀聖</option>
+          <option value="ainext">魂天</option>
+          
         </select>
       </div>
 

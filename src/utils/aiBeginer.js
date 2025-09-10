@@ -1,4 +1,4 @@
-import { checkWinner } from "./checkWinner";
+import { checkWinner } from "./checkWinner.js";
 
 //　１手先だけを予測するランダムAI
 export function getRandomMove(board, nextRow, currentPlayer) {

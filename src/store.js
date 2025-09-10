@@ -37,7 +37,7 @@ const initialState ={
     winner: null,
     nextRow: Array(COLS).fill(ROWS-1),
     history : [],
-    aiType: "beginer" // beginer,master,celestial
+    aiType: "beginer" // beginer,master,celestial,ainext
 };
 
 // reducer

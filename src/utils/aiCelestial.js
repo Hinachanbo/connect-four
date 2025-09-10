@@ -1,4 +1,4 @@
-import { checkWinner } from "./checkWinner";
+import { checkWinner } from "./checkWinner.js";
 
 // MCTS
 class Node{
@@ -25,8 +25,10 @@ export function simulate(board, nextRow, player) {
   let currentPlayer = player;
   let boardCopy = board.map(r => [...r]);
   let nextRowCopy = [...nextRow];
+  let moveCount = 0;
+  let endturn = 25;
 
-  while (true) {
+  while (moveCount < endturn) {
     const moves = nextRowCopy
       .map((row, col) => (row >= 0 ? { row, col } : null))
       .filter(x => x != null);
@@ -43,7 +45,7 @@ export function simulate(board, nextRow, player) {
       }
     }
     // 相手の必勝手をブロック
-    if(!lastMove && Math.random() < 0.8){
+    if(!lastMove){
       for (const move of moves) {
         const tmpBoard = boardCopy.map(r => [...r]);
         tmpBoard[move.row][move.col] = -currentPlayer;
@@ -62,9 +64,18 @@ export function simulate(board, nextRow, player) {
 
     const winner = checkWinner(boardCopy, [lastMove.row, lastMove.col]);
     if (winner) return winner;
+    //その手を打って相手のリーチを作らないか
+    if(nextRowCopy[lastMove.col]  !== -1){
+      const tmpBoard = boardCopy.map(r => [...r]);
+      tmpBoard[nextRowCopy[lastMove.col]][lastMove.col] = -currentPlayer;
+      const winner = checkWinner(tmpBoard,[nextRowCopy[lastMove.col],lastMove.col]);
+      if(winner === -currentPlayer) return winner;
+    } 
 
     currentPlayer = -currentPlayer; // 手番交代
+    moveCount++;
   }
+  return "draw";
 }
 
 export function mcts(board,nextRow,player, iterations = 15000){

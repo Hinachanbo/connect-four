@@ -1,4 +1,4 @@
-import { ROWS, COLS } from '../config';
+import { ROWS, COLS } from '../config.js';
 
 //勝敗判定
 export function checkWinner(board,now){
