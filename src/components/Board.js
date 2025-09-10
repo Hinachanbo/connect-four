@@ -32,13 +32,16 @@ export default function Board() {
     setAiThinking(true);
     const timer = setTimeout(() => {
       let move;
-      if (aiType === "celestial") move = mcts(board, nextRow, -1, 10000);
-      else if (aiType === "master") move = minimax(board, nextRow, 6, true, -1).col;
+      if (aiType === "celestial") move = mcts(board, nextRow, -1, 15000);
+      else if (aiType === "master") {
+        const col = minimax(board, nextRow, 6, true, -1,-Infinity,Infinity,null).col;
+        move = {row : nextRow[col] ,col : col};
+      }
       else move = getRandomMove(board, nextRow,currentPlayer);
 
       if (move) {
-        const row = move.row ?? nextRow[move];
-        const col = move.col ?? move;
+        const row = move.row;
+        const col = move.col;
         dispatch(dropDisc(row, col));
         playDropSound();
       }

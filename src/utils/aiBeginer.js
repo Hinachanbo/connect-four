@@ -1,6 +1,6 @@
 import { checkWinner } from "./checkWinner";
 
-//　リーチを見逃さないだけのランダムAI
+//　１手先だけを予測するランダムAI
 export function getRandomMove(board, nextRow, currentPlayer) {
   // nextRow から置ける列を取得
   const availableCols = nextRow

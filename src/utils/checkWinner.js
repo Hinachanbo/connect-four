@@ -6,6 +6,7 @@ export function checkWinner(board,now){
         [1,0],[0,1],[1,1],[1,-1]
         //下、右、右下、左下
     ];
+    if(now === null) return null;
     let [r,c] = now;
     if(board[r][c] === 0) return null;
     const player = board[r][c];

@@ -31,52 +31,34 @@ export function simulate(board, nextRow, player) {
       .map((row, col) => (row >= 0 ? { row, col } : null))
       .filter(x => x != null);
     if (moves.length === 0) return "draw";
-
+    
     // 自分が勝てる手
+    let lastMove;
     for (const move of moves) {
       const tmpBoard = boardCopy.map(r => [...r]);
       tmpBoard[move.row][move.col] = currentPlayer;
       if (checkWinner(tmpBoard, [move.row, move.col]) === currentPlayer) {
-        return currentPlayer;
-      }
-    }
-    /*
-    ブロックしなければいけない手を必ず打つようにしてほしいが、そのような手が存在するときにその手を打つように設定してはいけない。
-    その手を打つ価値が低くなるため？？
-    */
-    /*
-    // 相手の必勝手をブロック
-    let blockMove = null;
-    for (const move of moves) {
-      const tmpBoard = boardCopy.map(r => [...r]);
-      tmpBoard[move.row][move.col] = -currentPlayer;
-      if (checkWinner(tmpBoard, [move.row, move.col]) === -currentPlayer) {
-        blockMove = move;
+        lastMove = move;
         break;
       }
     }
-
-    let lastMove;
-    if (blockMove) {
-      // ブロック手を置く
-      boardCopy[blockMove.row][blockMove.col] = currentPlayer;
-      nextRowCopy[blockMove.col] = blockMove.row - 1;
-      lastMove = blockMove
-    }else{
-      // ランダム手（必勝手・ブロック手がない場合）
-      const move = moves[Math.floor(Math.random() * moves.length)];
-      boardCopy[move.row][move.col] = currentPlayer;
-      nextRowCopy[move.col] = move.row - 1;
-      lastMove = move;
+    // 相手の必勝手をブロック
+    if(!lastMove && Math.random() < 0.8){
+      for (const move of moves) {
+        const tmpBoard = boardCopy.map(r => [...r]);
+        tmpBoard[move.row][move.col] = -currentPlayer;
+        if (checkWinner(tmpBoard, [move.row, move.col]) === -currentPlayer) {
+          lastMove = move;
+          break;
+        }
+      }
     }
-      */
-    
-    // ランダム手（必勝手・ブロック手がない場合）
-    let lastMove;
-    const move = moves[Math.floor(Math.random() * moves.length)];
-    boardCopy[move.row][move.col] = currentPlayer;
-    nextRowCopy[move.col] = move.row - 1;
-    lastMove = move;
+    if(!lastMove){
+      // ランダム手（必勝手・ブロック手がない場合）
+      lastMove = moves[Math.floor(Math.random() * moves.length)];
+    }
+    boardCopy[lastMove.row][lastMove.col] = currentPlayer;
+    nextRowCopy[lastMove.col] = lastMove.row - 1;
 
     const winner = checkWinner(boardCopy, [lastMove.row, lastMove.col]);
     if (winner) return winner;
@@ -85,7 +67,26 @@ export function simulate(board, nextRow, player) {
   }
 }
 
-export function mcts(board,nextRow,player, iterations = 1000){
+export function mcts(board,nextRow,player, iterations = 15000){
+   const moves = nextRow
+    .map((row, col) => (row >= 0 ? { row, col } : null))
+    .filter(x => x != null);
+    
+  for (const move of moves) {
+    const tmpBoard = board.map(r => [...r]);
+    tmpBoard[move.row][move.col] = player;
+    if (checkWinner(tmpBoard, [move.row, move.col]) === player) {
+      return move;
+    }
+  }
+  for (const move of moves) {
+    const tmpBoard = board.map(r => [...r]);
+    tmpBoard[move.row][move.col] = -player;
+    if (checkWinner(tmpBoard, [move.row, move.col]) === -player) {
+      return move;
+    }
+  }
+
   const root = new Node(board,[...nextRow],player);
   for(let i = 0; i < iterations; i++){
     let node = root;
